@@ -4,10 +4,11 @@ const ApiLogController = () => {
     const getApiLogs = async (req, res) => {
         const areaCode = req.params.areaCode || 510;
         const limit = req.params.limit || 5;
+        const counteryCode = req.params.counteryCode || 'US';
         const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
 
-        twilio.availablePhoneNumbers('US')
+        twilio.availablePhoneNumbers(counteryCode)
             .local
             .list({areaCode: areaCode, limit: limit})
             .then(local => {
